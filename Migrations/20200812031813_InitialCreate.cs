@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace kingsmen.Migrations
 {
@@ -13,8 +12,9 @@ namespace kingsmen.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    PageId = table.Column<int>(nullable: false),
+                    PageId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    UrlSlug = table.Column<string>(nullable: true),
                     SecretIdentity = table.Column<string>(nullable: true),
                     Align = table.Column<string>(nullable: true),
                     Eye = table.Column<string>(nullable: true),
@@ -22,9 +22,9 @@ namespace kingsmen.Migrations
                     Sex = table.Column<string>(nullable: true),
                     GSM = table.Column<string>(nullable: true),
                     Alive = table.Column<string>(nullable: true),
-                    Appearances = table.Column<int>(nullable: false),
-                    FirstAppearanceDate = table.Column<DateTime>(nullable: false),
-                    FirstAppearanceYear = table.Column<int>(nullable: false)
+                    Appearances = table.Column<string>(nullable: true),
+                    FirstAppearanceDate = table.Column<string>(nullable: true),
+                    FirstAppearanceYear = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

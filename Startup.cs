@@ -12,6 +12,8 @@ namespace kingsmen
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,11 +24,26 @@ namespace kingsmen
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // services.AddCors(options =>
+            // {
+            //     options.AddPolicy(name: MyAllowSpecificOrigins,
+            //                       builder =>
+            //                       {
+            //                           builder.WithOrigins("http://localhost:3000")
+            //                           .AllowAnyHeader()
+            //                           .AllowAnyMethod()
+            //                           .AllowCredentials();
+            //                       });
+            // });
+
 
             services.AddDbContext<CharacterContext>(opt =>
                opt.UseSqlite("Data Source=characters.db"));
 
-            services.AddControllersWithViews();
+            services.AddControllers();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -49,11 +66,25 @@ namespace kingsmen
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

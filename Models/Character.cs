@@ -23,9 +23,11 @@ namespace kingsmen.Models
     {
         public int Id { get; set; }
 
-        public int PageId { get; set; }
+        public string PageId { get; set; }
 
         public string Name { get; set; }
+
+        public string UrlSlug { get; set; }
 
         public string SecretIdentity { get; set; }
 
@@ -41,10 +43,10 @@ namespace kingsmen.Models
 
         public string Alive { get; set; }
 
-        public int Appearances { get; set; }
+        public string Appearances { get; set; }
 
-        public DateTime FirstAppearanceDate { get; set; }
+        public string FirstAppearanceDate { get; set; }
 
-        public int FirstAppearanceYear { get; set; }
+        public string FirstAppearanceYear { get; set; }
     }
 }
